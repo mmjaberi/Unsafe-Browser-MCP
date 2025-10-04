@@ -60,8 +60,8 @@ async def mcp_client_example():
         "docker",
         [
             "run", "--rm", "-i",
-            "-v", "/Users/mohammedaljaberi/Desktop/unsafe-browser-mcp/downloads:/app/downloads",
-            "-v", "/Users/mohammedaljaberi/Desktop/unsafe-browser-mcp/screenshots:/app/screenshots",
+            "-v", "~/unsafe-browser-mcp/downloads:/app/downloads",
+            "-v", "~/unsafe-browser-mcp/screenshots:/app/screenshots",
             "unsafe-browser-mcp:latest",
             "python", "mcp_server.py"
         ]
