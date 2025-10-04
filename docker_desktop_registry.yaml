@@ -17,16 +17,16 @@ servers:
     icon: "🔓"
     volumes:
       - type: bind
-        source: ${HOME}/Desktop/unsafe-browser-mcp/downloads
+        source: ${HOME}/unsafe-browser-mcp/downloads
         target: /app/downloads
       - type: bind
-        source: ${HOME}/Desktop/unsafe-browser-mcp/screenshots
+        source: ${HOME}/unsafe-browser-mcp/screenshots
         target: /app/screenshots
       - type: bind
-        source: ${HOME}/Desktop/unsafe-browser-mcp/logs
+        source: ${HOME}/unsafe-browser-mcp/logs
         target: /app/logs
       - type: bind
-        source: ${HOME}/Desktop/unsafe-browser-mcp/sessions
+        source: ${HOME}/unsafe-browser-mcp/sessions
         target: /app/sessions
     environment:
       PYTHONUNBUFFERED: "1"
