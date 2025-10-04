@@ -7,7 +7,7 @@ Show "Unsafe Browser" in Docker Desktop's MCP Toolkit (like your other MCPs)
 
 ### Step 1: Build
 ```bash
-cd ~/Desktop/unsafe-browser-mcp
+cd ~/unsafe-browser-mcp
 docker build -t unsafe-browser-mcp:latest .
 ```
 
@@ -28,8 +28,7 @@ chmod +x install-to-docker-desktop.sh
 Your MCP now appears in Docker Desktop alongside:
 - curl
 - Desktop Commander  
-- DuckDuckGo
-- etc.
+- etc..
 
 ## Using It
 
@@ -57,4 +56,4 @@ Just run the 3 steps above! 🎉
 - Verify image: `docker images | grep unsafe-browser-mcp`
 
 **Need help?**
-See: Docker Desktop MCP Toolkit Integration Guide (in artifacts)
+See: Docker Desktop MCP Toolkit Integration Guide.
