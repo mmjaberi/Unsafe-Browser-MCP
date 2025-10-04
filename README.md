@@ -37,7 +37,7 @@ This server **bypasses SSL certificate validation**. It should **ONLY** be used 
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/mohammedaljaberi/unsafe-browser-mcp.git
+   git clone https://github.com/mmjaberi/Unsafe-Browser-MCP.git
    cd unsafe-browser-mcp
    ```
 
