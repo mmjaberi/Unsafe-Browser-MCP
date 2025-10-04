@@ -3,7 +3,7 @@
 ## Quick Install
 
 ```bash
-cd ~/Desktop/unsafe-browser-mcp
+cd ~/unsafe-browser-mcp
 
 # Make script executable
 chmod +x install-to-docker-mcp.sh
@@ -11,15 +11,15 @@ chmod +x install-to-docker-mcp.sh
 # Run installation
 ./install-to-docker-mcp.sh
 
-# Restart Claude Desktop
+# Restart LLM
 ```
 
 ## What Gets Installed
 
 The script will:
 1. ✅ Build the Docker image
-2. ✅ Create catalog entry in `/Users/mohammedaljaberi/.docker/mcp/catalogs/unsafe-browser-mcp/`
-3. ✅ Configure Claude Desktop
+2. ✅ Create catalog entry in `~/.docker/mcp/catalogs/unsafe-browser-mcp/`
+3. ✅ Configure LLM.
 4. ✅ Create symlink for easy updates
 
 ## Directory Structure
@@ -35,7 +35,7 @@ The script will:
 
 Your MCP will be installed at:
 ```
-/Users/mohammedaljaberi/.docker/mcp/catalogs/unsafe-browser-mcp/
+~/.docker/mcp/catalogs/unsafe-browser-mcp/
 ```
 
 ## Managing the Catalog
@@ -52,15 +52,13 @@ ls -la ~/.docker/mcp/catalogs/
 
 ### Update the MCP
 ```bash
-cd ~/Desktop/unsafe-browser-mcp
+cd ~/unsafe-browser-mcp
 docker build -t unsafe-browser-mcp:latest .
-# Restart Claude Desktop
 ```
 
 ### Uninstall
 ```bash
 rm -rf ~/.docker/mcp/catalogs/unsafe-browser-mcp
-# Remove from Claude Desktop config manually
 ```
 
 ## Advantages of Docker MCP Catalogs
@@ -83,7 +81,7 @@ The `catalog.json` includes:
 
 ## Testing
 
-After installation, ask Claude:
+After installation, ask LLM:
 
 ```
 "What browser tools do you have available?"
@@ -113,10 +111,10 @@ ls -la ~/.docker/mcp/catalogs/unsafe-browser-mcp/
 ls -la ~/.docker/mcp/catalogs/unsafe-browser-mcp/source
 ```
 
-### Tools not available in Claude
-1. Restart Claude Desktop completely
+### Tools not available in LLM
+1. Restart Your LLM completely
 2. Check Docker is running
-3. Verify config: `cat ~/Library/Application\ Support/Claude/claude_desktop_config.json`
+3. Verify config: `cat ~/Library/Application\ Support/LLM/LLM_config.json`
 
 ## Notes
 
