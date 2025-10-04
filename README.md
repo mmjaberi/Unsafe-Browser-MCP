@@ -156,7 +156,7 @@ MIT License - See LICENSE file for details
 
 ## 👤 Author
 
-Mohammed Al Jaberi
+Mohamed AlJaberi
 
 ## 🤝 Contributing
 
