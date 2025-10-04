@@ -32,7 +32,7 @@ cat > "$CATALOG_DIR/catalog.json" << EOF
   "name": "unsafe-browser-mcp",
   "version": "2.0.0",
   "description": "Browser automation with SSL bypass for testing and development",
-  "author": "Mohammed Al Jaberi",
+  "author": "Mohamed AlJaberi",
   "server": {
     "type": "docker",
     "image": "unsafe-browser-mcp:latest",
@@ -112,17 +112,9 @@ registry:
     ref: ""
   desktop-commander:
     ref: ""
-  duckduckgo:
-    ref: ""
   filesystem:
     ref: ""
-  google-maps:
-    ref: ""
   playwright:
-    ref: ""
-  puppeteer:
-    ref: ""
-  youtube_transcript:
     ref: ""
   unsafe-browser:
     ref: ""
@@ -176,7 +168,6 @@ echo "Next steps:"
 echo "1. Restart Docker Desktop"
 echo "2. Open Docker Desktop → MCP Toolkit"
 echo "3. You should see 'Unsafe Browser' in the list"
-echo "4. Click to start the server"
 echo ""
 echo "To verify:"
 echo "cat $REGISTRY_FILE"
