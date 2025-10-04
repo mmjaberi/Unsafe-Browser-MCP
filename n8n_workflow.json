@@ -1,0 +1,83 @@
+{
+  "name": "Browser Automation Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8000/api/navigate",
+        "options": {
+          "bodyContentType": "application/json"
+        },
+        "bodyParametersJson": "={ \"url\": \"{{ $json.url }}\" }"
+      },
+      "name": "Navigate to URL",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8000/api/screenshot",
+        "options": {
+          "bodyContentType": "application/json"
+        },
+        "bodyParametersJson": "={ \"filename\": \"{{ $json.filename }}\" }"
+      },
+      "name": "Take Screenshot",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8000/api/click",
+        "options": {
+          "bodyContentType": "application/json"
+        },
+        "bodyParametersJson": "={ \"selector\": \"{{ $json.selector }}\" }"
+      },
+      "name": "Click Element",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8000/api/fill",
+        "options": {
+          "bodyContentType": "application/json"
+        },
+        "bodyParametersJson": "={ \"selector\": \"{{ $json.selector }}\", \"text\": \"{{ $json.text }}\" }"
+      },
+      "name": "Fill Input",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8000/api/sessions/{{ $json.session_name }}/save",
+        "options": {}
+      },
+      "name": "Save Session",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8000/api/sessions/{{ $json.session_name }}/load",
+        "options": {
+          "bodyContentType": "application/json"
+        },
+        "bodyParametersJson": "={ \"auto_navigate\": {{ $json.auto_navigate || false }} }"
+      },
+      "name": "Load Session",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [1250, 300]
+    }
+  ],
+  "connections": {},
+  "settings": {},
+  "staticData": null
+}

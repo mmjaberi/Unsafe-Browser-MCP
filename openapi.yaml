@@ -1,0 +1,359 @@
+openapi: 3.0.0
+info:
+  title: Unsafe Browser MCP API
+  description: Browser automation with SSL bypass for testing and development
+  version: 2.0.0
+  contact:
+    name: API Support
+servers:
+  - url: http://localhost:8000
+    description: Local server
+  - url: https://YOUR_DOMAIN:8000
+    description: Production server (configure your domain)
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      description: Check if the API is running
+      operationId: healthCheck
+      responses:
+        '200':
+          description: Server is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: healthy
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /tools:
+    get:
+      summary: List all tools
+      description: Get a list of all available browser automation tools
+      operationId: listTools
+      responses:
+        '200':
+          description: List of tools
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tools:
+                    type: array
+                    items:
+                      type: object
+                  count:
+                    type: integer
+
+  /api/navigate:
+    post:
+      summary: Navigate to URL
+      description: Navigate the browser to a specified URL
+      operationId: navigateToUrl
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: The URL to navigate to
+                  example: https://example.com
+              required:
+                - url
+      responses:
+        '200':
+          description: Navigation successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  url:
+                    type: string
+                  title:
+                    type: string
+                  status:
+                    type: integer
+
+  /api/click:
+    post:
+      summary: Click element
+      description: Click an element on the page using CSS selector or smart keyword
+      operationId: clickElement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                selector:
+                  type: string
+                  description: CSS selector or smart keyword (e.g., 'login_button', '#submit')
+                  example: "#login-button"
+              required:
+                - selector
+      responses:
+        '200':
+          description: Click successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+
+  /api/fill:
+    post:
+      summary: Fill input field
+      description: Fill an input field with text
+      operationId: fillInput
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                selector:
+                  type: string
+                  description: CSS selector for the input field
+                  example: "#username"
+                text:
+                  type: string
+                  description: Text to fill in the field
+                  example: "admin@example.com"
+              required:
+                - selector
+                - text
+      responses:
+        '200':
+          description: Fill successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+
+  /api/screenshot:
+    post:
+      summary: Take screenshot
+      description: Capture a screenshot of the current page
+      operationId: takeScreenshot
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object:
+              properties:
+                filename:
+                  type: string
+                  description: Filename for the screenshot
+                  example: "screenshot.png"
+                  default: "screenshot.png"
+                full_page:
+                  type: boolean
+                  description: Capture full page or just viewport
+                  default: true
+      responses:
+        '200':
+          description: Screenshot captured
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  filename:
+                    type: string
+                  image:
+                    type: string
+                    description: Base64 encoded image data
+                  mimeType:
+                    type: string
+                    example: "image/png"
+
+  /api/fetch:
+    post:
+      summary: Fetch URL
+      description: Fetch content from a URL with SSL bypass and retry logic
+      operationId: fetchUrl
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: URL to fetch
+                  example: "https://api.example.com/data"
+              required:
+                - url
+      responses:
+        '200':
+          description: Fetch successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  status:
+                    type: integer
+                  content:
+                    type: string
+                  size:
+                    type: integer
+
+  /api/sessions:
+    get:
+      summary: List sessions
+      description: Get a list of all saved browser sessions
+      operationId: listSessions
+      responses:
+        '200':
+          description: List of sessions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sessions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        cookie_count:
+                          type: integer
+                        url:
+                          type: string
+                        saved_at:
+                          type: string
+                  count:
+                    type: integer
+
+  /api/sessions/{name}/save:
+    post:
+      summary: Save session
+      description: Save current browser session (cookies, URL)
+      operationId: saveSession
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Session name
+          example: "my_session"
+      responses:
+        '200':
+          description: Session saved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  path:
+                    type: string
+
+  /api/sessions/{name}/load:
+    post:
+      summary: Load session
+      description: Load a previously saved browser session
+      operationId: loadSession
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Session name
+          example: "my_session"
+        - name: auto_navigate
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+          description: Automatically navigate to saved URL
+      responses:
+        '200':
+          description: Session loaded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  cookie_count:
+                    type: integer
+                  domains:
+                    type: array
+                    items:
+                      type: string
+                  saved_url:
+                    type: string
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Optional API key for authentication
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+        error_type:
+          type: string
+
+tags:
+  - name: Navigation
+    description: Browser navigation operations
+  - name: Interaction
+    description: Page interaction operations
+  - name: Capture
+    description: Screenshot and content capture
+  - name: Session
+    description: Session management
+  - name: Fetching
+    description: HTTP fetching operations

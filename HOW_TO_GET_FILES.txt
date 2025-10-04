@@ -1,0 +1,97 @@
+HOW TO GET THE FILES
+=====================
+
+I've created a folder on your Desktop: unsafe-browser-mcp
+It already contains:
+- requirements.txt ✅
+- downloads/ folder ✅
+- screenshots/ folder ✅
+- logs/ folder ✅
+- This instruction file ✅
+
+YOU NEED TO ADD 5 MORE FILES FROM THE ARTIFACTS:
+=================================================
+
+Look at the RIGHT SIDE of the Claude chat window.
+You'll see an "Artifacts" panel with several items.
+
+Copy these artifacts and save them as files:
+
+1. ARTIFACT: "Simple Unsafe HTTPS Fetch (No Browser Required)"
+   → Save as: simple_unsafe_fetch.py
+
+2. ARTIFACT: "Custom MCP Server - Unsafe Browser with Certificate Bypass"
+   → Save as: unsafe_browser_mcp.py
+
+3. ARTIFACT: "Practical Examples - Ready to Use"
+   → Save as: practical_examples.py
+
+4. ARTIFACT: "Dockerfile for Unsafe Browser MCP Server"
+   → Save as: Dockerfile
+
+5. ARTIFACT: "docker-compose.yml"
+   → Save as: docker-compose.yml
+
+
+HOW TO COPY FROM ARTIFACTS:
+============================
+
+Method 1 (Easiest):
+- Click on the artifact name in the panel
+- You'll see the code/content
+- Click the "Copy" button (if available)
+- Or select all text (Cmd+A) and copy (Cmd+C)
+- Create a new file with the correct name
+- Paste the content
+- Save in: /Users/mohammedaljaberi/Desktop/unsafe-browser-mcp/
+
+Method 2 (If artifacts panel not visible):
+- Scroll through the chat conversation
+- Find each artifact (they appear as code blocks)
+- Copy the content
+- Save with the correct filename
+
+
+QUICK VERIFICATION:
+===================
+
+After copying all files, run this in Terminal:
+
+cd ~/Desktop/unsafe-browser-mcp
+ls -la
+
+You should see:
+- Dockerfile
+- docker-compose.yml  
+- requirements.txt
+- simple_unsafe_fetch.py
+- unsafe_browser_mcp.py
+- practical_examples.py
+- downloads/
+- screenshots/
+- logs/
+- INSTRUCTIONS.md
+- HOW_TO_GET_FILES.txt
+
+
+NEXT STEPS:
+===========
+
+Once you have all files:
+
+1. Open Terminal
+2. cd ~/Desktop/unsafe-browser-mcp
+3. docker-compose build
+4. docker-compose run --rm simple-fetcher
+
+
+NEED HELP?
+==========
+
+If you can't see the Artifacts panel:
+- It should be on the right side of the Claude interface
+- Try expanding the window
+- Or ask me to show you specific code again
+
+If you have questions about any file:
+- Just ask! I can show you the content again

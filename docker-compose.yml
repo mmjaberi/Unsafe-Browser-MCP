@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  # Enhanced Async Fetcher (NEW)
+  enhanced-fetcher:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: unsafe-fetcher-enhanced
+    command: python enhanced_simple_fetcher.py
+    volumes:
+      - ./downloads:/app/downloads
+      - ./logs:/app/logs
+    stdin_open: true
+    tty: true
+    networks:
+      - mcp-network
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  # Enhanced Full Browser (NEW)
+  enhanced-browser:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: unsafe-browser-enhanced
+    command: python enhanced_browser_mcp.py
+    volumes:
+      - ./downloads:/app/downloads
+      - ./screenshots:/app/screenshots
+      - ./logs:/app/logs
+      - ./sessions:/app/sessions
+    stdin_open: true
+    tty: true
+    shm_size: '2gb'
+    networks:
+      - mcp-network
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  # Simple Fetcher Version (Legacy)
+  simple-fetcher:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: unsafe-fetcher-simple
+    command: python simple_unsafe_fetch.py
+    volumes:
+      - ./downloads:/app/downloads
+      - ./logs:/app/logs
+    stdin_open: true
+    tty: true
+    networks:
+      - mcp-network
+    restart: unless-stopped
+
+  # Full Browser Version (Legacy)
+  full-browser:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: unsafe-browser-full
+    command: python unsafe_browser_mcp.py
+    volumes:
+      - ./downloads:/app/downloads
+      - ./screenshots:/app/screenshots
+      - ./logs:/app/logs
+    stdin_open: true
+    tty: true
+    shm_size: '2gb'
+    networks:
+      - mcp-network
+    restart: unless-stopped
+
+  # Practical Examples Version
+  examples:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: unsafe-browser-examples
+    command: python practical_examples.py
+    volumes:
+      - ./downloads:/app/downloads
+      - ./screenshots:/app/screenshots
+      - ./logs:/app/logs
+    stdin_open: true
+    tty: true
+    networks:
+      - mcp-network
+    restart: unless-stopped
+
+networks:
+  mcp-network:
+    driver: bridge

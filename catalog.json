@@ -1,0 +1,127 @@
+{
+  "name": "unsafe-browser-mcp",
+  "version": "2.0.0",
+  "description": "Enhanced browser automation with SSL bypass, session management, and smart selectors",
+  "author": "Mohammed Al Jaberi",
+  "license": "MIT",
+  "repository": "local",
+  "keywords": [
+    "browser",
+    "automation",
+    "playwright",
+    "ssl-bypass",
+    "testing",
+    "session-management",
+    "web-scraping"
+  ],
+  "server": {
+    "type": "docker",
+    "image": "unsafe-browser-mcp:latest",
+    "command": "python",
+    "args": ["mcp_server.py"],
+    "environment": {
+      "PYTHONUNBUFFERED": "1"
+    },
+    "volumes": [
+      {
+        "host": "${PROJECT_DIR}/downloads",
+        "container": "/app/downloads"
+      },
+      {
+        "host": "${PROJECT_DIR}/screenshots",
+        "container": "/app/screenshots"
+      },
+      {
+        "host": "${PROJECT_DIR}/logs",
+        "container": "/app/logs"
+      },
+      {
+        "host": "${PROJECT_DIR}/sessions",
+        "container": "/app/sessions"
+      }
+    ],
+    "network": "host"
+  },
+  "capabilities": {
+    "browser_automation": true,
+    "session_management": true,
+    "network_inspection": true,
+    "smart_selectors": true,
+    "concurrent_fetching": true,
+    "ssl_bypass": true,
+    "screenshot": true
+  },
+  "tools": [
+    {
+      "name": "browser_navigate",
+      "description": "Navigate to a URL in the browser",
+      "category": "navigation"
+    },
+    {
+      "name": "browser_click",
+      "description": "Click element (supports smart keywords)",
+      "category": "interaction"
+    },
+    {
+      "name": "browser_fill",
+      "description": "Fill input fields",
+      "category": "interaction"
+    },
+    {
+      "name": "browser_screenshot",
+      "description": "Take screenshots",
+      "category": "capture"
+    },
+    {
+      "name": "browser_suggest_selectors",
+      "description": "Find available selectors",
+      "category": "discovery"
+    },
+    {
+      "name": "browser_save_session",
+      "description": "Save browser session",
+      "category": "session"
+    },
+    {
+      "name": "browser_load_session",
+      "description": "Load browser session",
+      "category": "session"
+    },
+    {
+      "name": "browser_list_sessions",
+      "description": "List all sessions",
+      "category": "session"
+    },
+    {
+      "name": "browser_network_summary",
+      "description": "View network activity",
+      "category": "network"
+    },
+    {
+      "name": "fetch_url",
+      "description": "Fetch URL with retry logic",
+      "category": "fetching"
+    },
+    {
+      "name": "fetch_json",
+      "description": "Fetch and parse JSON",
+      "category": "fetching"
+    },
+    {
+      "name": "download_file",
+      "description": "Download files",
+      "category": "fetching"
+    },
+    {
+      "name": "batch_fetch",
+      "description": "Concurrent URL fetching",
+      "category": "fetching"
+    }
+  ],
+  "warnings": [
+    "SSL certificate verification is DISABLED",
+    "Use only for testing and development",
+    "Do not use on production systems",
+    "Do not store sensitive credentials in sessions"
+  ]
+}

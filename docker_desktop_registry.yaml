@@ -1,0 +1,42 @@
+# Docker Desktop MCP Toolkit Configuration
+
+# For Docker Desktop's MCP Toolkit, you need to add your server to the registry
+
+# File location: ~/.docker/mcp/registry.yaml
+
+# Add this to your registry.yaml:
+
+servers:
+  unsafe-browser:
+    image: unsafe-browser-mcp:latest
+    command:
+      - python
+      - mcp_server.py
+    display_name: "Unsafe Browser"
+    description: "Browser automation with SSL bypass for testing"
+    icon: "🔓"
+    volumes:
+      - type: bind
+        source: ${HOME}/Desktop/unsafe-browser-mcp/downloads
+        target: /app/downloads
+      - type: bind
+        source: ${HOME}/Desktop/unsafe-browser-mcp/screenshots
+        target: /app/screenshots
+      - type: bind
+        source: ${HOME}/Desktop/unsafe-browser-mcp/logs
+        target: /app/logs
+      - type: bind
+        source: ${HOME}/Desktop/unsafe-browser-mcp/sessions
+        target: /app/sessions
+    environment:
+      PYTHONUNBUFFERED: "1"
+    capabilities:
+      - browser_automation
+      - session_management
+      - network_inspection
+      - smart_selectors
+    tags:
+      - browser
+      - automation
+      - testing
+      - playwright
