@@ -308,5 +308,5 @@ load-session my_session -n
 
 ---
 
-**Updated**: January 2025  
+**Updated**: October 2025  
 **Version**: Enhanced v2.1
